@@ -74,7 +74,7 @@ def main():
             if tx and tx["hash"] != last_seen.get(eth):
                 value_eth = int(tx["value"]) / 1e18
                 usd = value_eth * eth_price
-                msg = f"[ETH] 入金\n从: {tx['from']}\n到: {tx['to']}\n💰 {value_eth:.6f} ETH ≈ ${usd:,.2f}"
+                msg = f"[ETH] 入金\n客户地址: {tx['from']}\n我们地址: {tx['to']}\n💰 {value_eth:.6f} ETH ≈ ${usd:,.2f}"
                 send_message(msg)
                 last_seen[eth] = tx["hash"]
 
@@ -84,7 +84,7 @@ def main():
             if tx and tx["transaction_id"] != last_seen.get(tron):
                 val = int(tx["value"]) / (10**int(tx["token_info"]["decimals"]))
                 symbol = tx["token_info"]["symbol"]
-                msg = f"[TRC20] 入金\n从: {tx['from']}\n到: {tx['to']}\n💰 {val} {symbol}"
+                msg = f"[TRC20] 入金\n客户地址: {tx['from']}\n我们地址: {tx['to']}\n💰 {val} {symbol}"
                 send_message(msg)
                 last_seen[tron] = tx["transaction_id"]
 
@@ -95,7 +95,7 @@ def main():
                 total = sum([out["value"] for out in tx["out"] if out.get("addr") == btc]) / 1e8
                 usd_val = total * btc_price
                 from_addr = tx.get("inputs", [{}])[0].get("prev_out", {}).get("addr", "不明")
-                msg = f"[BTC] 入金\n从: {from_addr}\n到: {btc}\n💰 {total:.8f} BTC ≈ ${usd_val:,.2f} USD\nTXID: {tx['hash']}"
+                msg = f"[BTC] 入金\n客户地址: {from_addr}\n我们地址: {btc}\n💰 {total:.8f} BTC ≈ ${usd_val:,.2f} USD\nTXID: {tx['hash']}"
                 send_message(msg)
                 last_seen[btc] = tx["hash"]
 
