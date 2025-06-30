@@ -99,7 +99,7 @@ def main():
                 send_message(msg)
                 last_seen[btc] = tx["hash"]
 
-        time.sleep(30)
+        time.sleep(5)
 
 if __name__ == "__main__":
     main()
