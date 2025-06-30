@@ -95,7 +95,7 @@ def main():
                 total = sum([out["value"] for out in tx["out"] if out.get("addr") == btc]) / 1e8
                 usd_val = total * btc_price
                 from_addr = tx.get("inputs", [{}])[0].get("prev_out", {}).get("addr", "不明")
-                msg = f"[BTC] 入金\n客户地址: {from_addr}\n我们地址: {btc}\n💰 {total:.8f} BTC ≈ ${usd_val:,.2f} USD\nTXID: {tx['hash']}"
+                msg = f"[BTC] 入金\n客户地址: '{from_addr}'\n我们地址: '{btc}'\n💰 {total:.8f} BTC ≈ ${usd_val:,.2f} USD\nTXID: {tx['hash']}"
                 send_message(msg)
                 last_seen[btc] = tx["hash"]
 
